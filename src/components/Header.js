@@ -5,9 +5,10 @@ class Header extends Component {
 
     render() {
        return (
-
-        <div>Hi Mom!</div>
-
+        <div>
+        <div style={{fontSize:'xx-large'}}>    🆆 🅾 🆁 🅳 🅻 Y <br/></div>
+        <div style={{color:'red'}}>{this.props.errorMessage}</div>
+        </div>
        )
 
 
