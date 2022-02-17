@@ -28,28 +28,17 @@ class App extends Component {
       currentRow:0,
       currentWord: '',
       currentGuess: '',
-      errorMessage: ''
+      errorMessage: '',
+      gameOver: false
     };
   }
 
  
   componentDidMount = () => {
-    this.downloadFile();
-    // let boardArray = [];
-    // for(let i=0;i<30;i++){
-    //   boardArray[i]={
-    //     status: "blank",
-    //     letter: ""
-    //   }
-    // }
-    // this.setState({
-    //   board:boardArray
-    // })
-    
-
+    this.downloadDictionary();
   }
 
-  async downloadFile() {
+  async downloadDictionary() {
     let response = await fetch("5LetterWords.txt");
       
     if(response.status !== 200) {
@@ -82,14 +71,15 @@ class App extends Component {
   }
 
   submitWord = (wordSubmitted) => {
+    if(!this.state.gameOver){
      if (this.checkword(wordSubmitted)){
      let currentBoard = [...this.state.board];
      let currentWord = this.state.currentWord;
      let boardRow = this.state.currentRow;
+     let errorMessage= this.state.errorMessage;
      let tileColor="white";
      let newRow = [];
      for(let i =0; i<wordSubmitted.length;i++){
-       console.log(currentWord[i],wordSubmitted[i])
         if(currentWord.includes(wordSubmitted[i])){
         tileColor="blue";
         if(currentWord[i]===wordSubmitted[i]){
@@ -106,13 +96,25 @@ class App extends Component {
      currentBoard[boardRow]=newRow;
      console.log(currentBoard);
      boardRow++;
+     let gameOver = false
+     if(boardRow>6) {gameOver=true}
+     if(wordSubmitted===currentWord){
+       errorMessage="You WIN!"
+       gameOver=true;
+     }
      this.setState({
        board:currentBoard,
-       currentRow:boardRow
+       currentRow:boardRow,
+       gameOver:gameOver,
+       errorMessage: errorMessage
      })} 
+    }
   }
 
   keyboardType = (keyClicked) => {
+   this.setState({
+     errorMessage:''
+   })
    let errorMessage = '';
    let currentGuess= '';
    let guessBox = document.getElementById("guessWordBox");
@@ -132,12 +134,14 @@ class App extends Component {
      else {
      errorMessage="We're only looking for 5-digit words";
      currentGuess=''
+     this.setState({
+      errorMessage:errorMessage
+    })
     } 
     }
     }
   
  this.setState({
-        errorMessage:errorMessage,
         currentGuess:currentGuess
       })
   }
