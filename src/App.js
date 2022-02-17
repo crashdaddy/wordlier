@@ -99,7 +99,7 @@ class App extends Component {
      let gameOver = false
      if(boardRow>5) {
        gameOver=true;
-       errorMessage="Bad Luck. Play again!";
+       errorMessage="Bad Luck. The word was "+ currentWord + "Play again!";
      }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
