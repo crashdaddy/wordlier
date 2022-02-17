@@ -97,7 +97,10 @@ class App extends Component {
      console.log(currentBoard);
      boardRow++;
      let gameOver = false
-     if(boardRow>6) {gameOver=true}
+     if(boardRow>5) {
+       gameOver=true;
+       errorMessage="Bad Luck. Play again!";
+     }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
        gameOver=true;
