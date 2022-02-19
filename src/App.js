@@ -155,7 +155,7 @@ class App extends Component {
     <div className="App">
      
       <header className="App-header">
-         <Header errorMessage={this.state.errorMessage}/><br/>
+         <Header errorMessage={this.state.errorMessage}/>
         <div style={{width:'180px'}}>
         {this.state.board.map((board,idx)=>{
         return (
@@ -172,7 +172,6 @@ class App extends Component {
         </div>
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
-<br />
           <Keyboard keyboardType={this.keyboardType} />
       </header>
     </div>
