@@ -28,7 +28,7 @@ class App extends Component {
       currentRow:0,
       currentWord: '',
       currentGuess: '',
-      errorMessage: '',
+      errorMessage: String.fromCharCode(160),
       gameOver: false
     };
   }
@@ -116,9 +116,9 @@ class App extends Component {
 
   keyboardType = (keyClicked) => {
    this.setState({
-     errorMessage:''
+     errorMessage:String.fromCharCode(160)
    })
-   let errorMessage = '';
+   let errorMessage = String.fromCharCode(160);
    let currentGuess= '';
    let guessBox = document.getElementById("guessWordBox");
    if(guessBox) {
