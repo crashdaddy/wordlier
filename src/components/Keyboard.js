@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import '../App.css';
 
 class Keyboard extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
-            alphabet:["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","←","Enter"]
+            topRow:["Q","W","E","R","T","Y","U","I","O","P"],
+            middleRow:["A","S","D","F","G","H","J","K","L"],
+            bottomRow:["Z","X","C","V","B","N","M","←","Enter"]
         };
       }
 
@@ -14,11 +17,22 @@ class Keyboard extends Component {
       };
 
     render() {
+     
        return (
-        <div style={{width:"300px",textAlign:"center",marginTop:'5px'}}>
-        {this.state.alphabet.map((letter,idx)=> 
-        <div style={{display:'inline-block',marginTop:'4px',paddingLeft:'4px',paddingRight:'4px',height:'30px',overflow:'auto',float:'left',border:'1px solid white',marginRight:'8px',margintTop:'4px'}} key={letter} onClick={this.handleClick} >{letter}</div>
+        <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"330px",textAlign:"center",marginTop:'15px'}}>
+        <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
+        {this.state.topRow.map((letter,idx)=> 
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
+        )}</div>  <br/>
+        <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
+        {this.state.middleRow.map((letter,idx)=> 
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
+        )}</div><br/>
+        <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
+        {this.state.bottomRow.map((letter,idx)=> 
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
         )}
+        </div>
         </div>
        )
 

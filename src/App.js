@@ -171,7 +171,7 @@ class App extends Component {
         })}
         </div>
           
-          <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" style={{marginTop:'5px'}} />
+          <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
 <br />
           <Keyboard keyboardType={this.keyboardType} />
       </header>

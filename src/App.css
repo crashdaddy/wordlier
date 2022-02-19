@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* keyboard keys */
+
+.keyStyle {
+  margin-top:4px;
+  padding-left:4px;
+  padding-right:4px;
+  height:30px;
+  border:1px solid white;
+  border-radius:5px;
+  margin-right:6px;
+  margin-top:4px;
+}
+
+.keyStyle:hover {
+  background-color: lightyellow;
+  color:black;
+}
+
+/* input box  */
+
+.inputBox {
+  margin-top: 10px;
+  width: 150px;
+  height: 24px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: xx-large;
+  background-color: lightblue;
+}

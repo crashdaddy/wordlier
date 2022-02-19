@@ -11,7 +11,8 @@ class Tile extends Component {
     border:'1px solid white',
     marginRight:'4px',
     marginTop:'4px',
-    color:"black"}
+    color:"black",
+    borderRadius:'5px'}
        return (
 
         <div style={bgStyle}>{this.props.letter}</div>
