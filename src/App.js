@@ -126,7 +126,7 @@ class App extends Component {
       
       this.submitWord(guessBox.value);
     } else {
-    if(guessBox.value.length<6){
+    if(guessBox.value.length<=5){
      if(keyClicked==="←"){
       guessBox.value = guessBox.value.substring(0, guessBox.value.length - 1);
       currentGuess=guessBox.value; 
