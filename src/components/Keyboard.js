@@ -21,50 +21,18 @@ class Keyboard extends Component {
        return (
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"330px",textAlign:"center"}}>
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
-        {this.state.topRow.map((letter,idx)=> {
-          let bgColor = "#4B2A0C"
-          if(this.props.usedList.includes(letter)){
-            bgColor="#282c34";
-          }
-          if(this.props.foundList.includes(letter)){
-            bgColor="blue";
-          }
-          if(this.props.correctList.includes(letter)){
-            bgColor="green";
-          }
-        return(
-        <div className='keyStyle' key={letter} style={{backgroundColor:bgColor}} onClick={this.handleClick} >{letter}</div>
-        )})}</div>  <br/>
+        {this.state.topRow.map((letter,idx)=> 
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
+        )}</div>  <br/>
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
-        {this.state.middleRow.map((letter,idx)=> {
-          let bgColor = "#4B2A0C"
-          if(this.props.usedList.includes(letter)){
-            bgColor="#282c34";
-          }
-          if(this.props.foundList.includes(letter)){
-            bgColor="blue";
-          }
-          if(this.props.correctList.includes(letter)){
-            bgColor="green";
-          }
-        return(
-        <div className='keyStyle' key={letter} style={{backgroundColor:bgColor}} onClick={this.handleClick} >{letter}</div>
-        )})}</div><br/>
+        {this.state.middleRow.map((letter,idx)=> 
+     
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
+        )}</div><br/>
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
-        {this.state.bottomRow.map((letter,idx)=> {
-          let bgColor = "#4B2A0C"
-          if(this.props.usedList.includes(letter)){
-            bgColor="#282c34";
-          }
-          if(this.props.foundList.includes(letter)){
-            bgColor="blue";
-          }
-          if(this.props.correctList.includes(letter)){
-            bgColor="green";
-          }
-        return(
-        <div className='keyStyle' key={letter} style={{backgroundColor:bgColor}} onClick={this.handleClick} >{letter}</div>
-        )})}
+        {this.state.bottomRow.map((letter,idx)=>
+        <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
+        )}
         </div>
         </div>
        )

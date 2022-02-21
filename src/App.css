@@ -52,6 +52,7 @@
 
 .keyStyle:hover {
   color:black;
+  background-color: lightyellow;
   border: 1px solid black;
 }
 
