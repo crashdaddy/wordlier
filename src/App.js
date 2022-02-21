@@ -25,6 +25,9 @@ class App extends Component {
         [{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"}],
         [{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"},{letter:"",status:"white"}]
       ],
+      correctList:[],  // right letter right spot
+      foundList: [],   // right letter wrong spot
+      usedList:[],     // any letter typed 
       currentRow:0,
       currentWord: '',
       currentGuess: '',
@@ -78,12 +81,18 @@ class App extends Component {
      let boardRow = this.state.currentRow;
      let errorMessage= this.state.errorMessage;
      let tileColor="white";
+     let foundList = this.state.foundList;
+     let usedList = this.state.usedList;
+     let correctList = this.state.correctList;
      let newRow = [];
      for(let i =0; i<wordSubmitted.length;i++){
+       usedList.push(wordSubmitted[i]);
         if(currentWord.includes(wordSubmitted[i])){
         tileColor="blue";
+        foundList.push(wordSubmitted[i])
         if(currentWord[i]===wordSubmitted[i]){
           tileColor="lightgreen";
+          correctList.push(wordSubmitted[i]);
         }
       }
       newRow[i]={
@@ -109,7 +118,10 @@ class App extends Component {
        board:currentBoard,
        currentRow:boardRow,
        gameOver:gameOver,
-       errorMessage: errorMessage
+       errorMessage: errorMessage,
+       usedList:usedList,
+       foundList:foundList,
+       correctList:correctList
      })} 
     }
   }
@@ -151,6 +163,7 @@ class App extends Component {
 
   render(){
     console.log(this.state.currentWord);
+
   return (
     <div className="App">
      
@@ -172,7 +185,7 @@ class App extends Component {
         </div>
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
-          <Keyboard keyboardType={this.keyboardType} />
+          <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
       </header>
     </div>
   );

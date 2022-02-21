@@ -51,8 +51,8 @@
 }
 
 .keyStyle:hover {
-  background-color: lightyellow;
   color:black;
+  border: 1px solid black;
 }
 
 /* input box  */
