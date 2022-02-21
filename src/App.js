@@ -51,12 +51,13 @@ class App extends Component {
     // read response stream as text
     let text_data = await response.text();
     let wordList = text_data.split("\n");
-    this.setState({
-      words: wordList
-    });
-    let maxWords = this.state.words.length;
+ 
+    let maxWords = wordList.length;
     let wordNumber = getRandomInt(0,maxWords);
-    this.setState({currentWord:this.state.words[wordNumber].toUpperCase()});
+    this.setState({
+      words: wordList,
+      currentWord:wordList[wordNumber].toUpperCase()
+    });
   }
 
   checkword = (wordToCheck) => {
@@ -170,18 +171,18 @@ class App extends Component {
       <header className="App-header">
          <Header errorMessage={this.state.errorMessage}/>
         <div style={{width:'180px'}}>
-        {this.state.board.map((board,idx)=>{
-        return (
-          <div>
-          {board.map((row,idx)=>{
-            return(
-              <div><Tile letter={row.letter} color={row.status} key={idx}/></div>
-                   )
-            })
-          }  
-            </div>
-                )
-        })}
+              {this.state.board.map((board,idx)=>{
+              return (
+              <div key = {idx}>
+                  {board.map((row,idx)=>{
+                  return(
+                  <div><Tile letter={row.letter} color={row.status} key={idx}/></div>
+                  )
+                  })
+                  }  
+              </div>
+              )
+              })}
         </div>
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
