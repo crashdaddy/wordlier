@@ -26,11 +26,10 @@ class Keyboard extends Component {
         )}</div>  <br/>
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
         {this.state.middleRow.map((letter,idx)=> 
-     
         <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
         )}</div><br/>
         <div style={{display: "flex",flexWrap:"wrap",justifyContent:"center",width:"100%"}}>
-        {this.state.bottomRow.map((letter,idx)=>
+        {this.state.bottomRow.map((letter,idx)=> 
         <div className='keyStyle' key={letter} onClick={this.handleClick} >{letter}</div>
         )}
         </div>

@@ -32,13 +32,25 @@ class App extends Component {
       currentWord: '',
       currentGuess: '',
       errorMessage: String.fromCharCode(160),
-      gameOver: false
+      gameOver: false,
+      score: 0
     };
   }
 
  
   componentDidMount = () => {
     this.downloadDictionary();
+
+    if (localStorage.getItem("score")){
+      // setting the state of welcomeMessage to "Welcome back!" if it does
+    let oldScore = Number(localStorage.getItem("score"));
+    this.setState({
+      score: oldScore
+    })
+  } else {
+      // creating the "hasVisited" key value pair in localStorage if it doesnt exist
+    localStorage.setItem("score", "0");
+  }
   }
 
   async downloadDictionary() {
@@ -85,6 +97,7 @@ class App extends Component {
      let foundList = this.state.foundList;
      let usedList = this.state.usedList;
      let correctList = this.state.correctList;
+     let currentScore = this.state.score;
      let newRow = [];
      for(let i =0; i<wordSubmitted.length;i++){
        usedList.push(wordSubmitted[i]);
@@ -104,7 +117,6 @@ class App extends Component {
      }
      
      currentBoard[boardRow]=newRow;
-     console.log(currentBoard);
      boardRow++;
      let gameOver = false
      if(boardRow>5) {
@@ -114,6 +126,29 @@ class App extends Component {
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
        gameOver=true;
+       switch (boardRow-1) {
+        case 0:
+          currentScore+= 1000;
+          break;
+        case 1:
+          currentScore+= 200;
+          break;
+        case 2:
+          currentScore+= 100;
+          break;
+        case 3:
+          currentScore+= 60;
+          break;
+        case 4:
+          currentScore+= 45;
+          break;
+        case 5:
+          currentScore+= 30;
+          break;
+        default:
+          break;
+      }
+      localStorage.setItem("score",currentScore.toString());
      }
      this.setState({
        board:currentBoard,
@@ -122,7 +157,8 @@ class App extends Component {
        errorMessage: errorMessage,
        usedList:usedList,
        foundList:foundList,
-       correctList:correctList
+       correctList:correctList,
+       score: currentScore
      })} 
     }
   }
@@ -187,6 +223,7 @@ class App extends Component {
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
           <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
+          <div>Score: {this.state.score}</div>
       </header>
     </div>
   );
