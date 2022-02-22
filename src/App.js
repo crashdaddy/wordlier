@@ -160,7 +160,9 @@ class App extends Component {
      if(boardRow>5) {
        gameOver=true;
        errorMessage="Bad Luck. The word was "+ currentWord + ". Play again!";
+       if(wordSubmitted!==currentWord){
        gamesPlayed++;
+       }
      }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
