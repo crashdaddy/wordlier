@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Tile from './components/Tile';
 import Keyboard from './components/Keyboard';
+import Score from './components/Score';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -33,24 +34,59 @@ class App extends Component {
       currentGuess: '',
       errorMessage: String.fromCharCode(160),
       gameOver: false,
-      score: 0
+      score: 0,
+      gamesPlayed: 0,
+      gamesWon: 0
     };
   }
 
+  getScores = () => {
+      if (localStorage.getItem("score")){
+      // setting the score from memory
+      let oldScore = Number(localStorage.getItem("score"));
+      this.setState({
+      score: oldScore
+      })
+      } else {
+      // creating the score for the first time
+      localStorage.setItem("score", "0");
+      }
+      if (localStorage.getItem("gamesPlayed")){
+
+      let gamesPlayed = Number(localStorage.getItem("gamesPlayed"));
+      this.setState({
+      gamesPlayed: gamesPlayed
+      })
+      localStorage.setItem("gamesPlayed",gamesPlayed.toString());
+      } else {
+
+      localStorage.setItem("gamesPlayed", "0");
+      }
+      if (localStorage.getItem("gamesWon")){
+      let gamesWon = Number(localStorage.getItem("gamesWon"));
+      this.setState({
+      gamesWon: gamesWon
+      })
+      } else {
+      localStorage.setItem("gamesWon", "0");
+      }
+}
+
+  clearScores = () => {
+    localStorage.setItem("score","0");
+    localStorage.setItem("gamesPlayed","0");
+    localStorage.setItem("gamesWon","0");
+    this.setState({
+      gamesPlayed:0,
+      gamesWon:0,
+      score:0
+    })
+  }
  
   componentDidMount = () => {
     this.downloadDictionary();
 
-    if (localStorage.getItem("score")){
-      // setting the state of welcomeMessage to "Welcome back!" if it does
-    let oldScore = Number(localStorage.getItem("score"));
-    this.setState({
-      score: oldScore
-    })
-  } else {
-      // creating the "hasVisited" key value pair in localStorage if it doesnt exist
-    localStorage.setItem("score", "0");
-  }
+    this.getScores();
   }
 
   async downloadDictionary() {
@@ -98,6 +134,8 @@ class App extends Component {
      let usedList = this.state.usedList;
      let correctList = this.state.correctList;
      let currentScore = this.state.score;
+     let gamesWon = this.state.gamesWon;
+     let gamesPlayed = this.state.gamesPlayed;
      let newRow = [];
      for(let i =0; i<wordSubmitted.length;i++){
        usedList.push(wordSubmitted[i]);
@@ -122,6 +160,7 @@ class App extends Component {
      if(boardRow>5) {
        gameOver=true;
        errorMessage="Bad Luck. The word was "+ currentWord + ". Play again!";
+       gamesPlayed++;
      }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
@@ -148,8 +187,12 @@ class App extends Component {
         default:
           break;
       }
-      localStorage.setItem("score",currentScore.toString());
+      gamesWon++;
+      gamesPlayed++;
      }
+      localStorage.setItem("gamesPlayed",gamesPlayed.toString());      
+      localStorage.setItem("score",currentScore.toString());
+      localStorage.setItem("gamesWon",gamesWon.toString());
      this.setState({
        board:currentBoard,
        currentRow:boardRow,
@@ -158,7 +201,9 @@ class App extends Component {
        usedList:usedList,
        foundList:foundList,
        correctList:correctList,
-       score: currentScore
+       score: currentScore,
+       gamesWon: gamesWon,
+       gamesPlayed:gamesPlayed
      })} 
     }
   }
@@ -223,7 +268,7 @@ class App extends Component {
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
           <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
-          <div>Score: {this.state.score}</div>
+          <Score score={this.state.score} gamesWon={this.state.gamesWon} gamesPlayed={this.state.gamesPlayed} clearScores={this.clearScores}/>
       </header>
     </div>
   );
