@@ -15,7 +15,8 @@ class Tile extends Component {
     paddingBottom:'4px',
     color:"black",
     borderRadius:'5px',
-    verticalAlign:'middle'}
+    verticalAlign:'middle'
+    }
        return (
 
         <div style={bgStyle}>{this.props.letter}</div>
