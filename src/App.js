@@ -216,8 +216,9 @@ class App extends Component {
    })
    let errorMessage = String.fromCharCode(160);
    let currentGuess= '';
+   let gameOver = this.state.gameOver;
    let guessBox = document.getElementById("guessWordBox");
-   if(guessBox) {
+   if(guessBox && !gameOver) {
     if(keyClicked==="Enter" && guessBox.value.length>=5){
       
       this.submitWord(guessBox.value);
