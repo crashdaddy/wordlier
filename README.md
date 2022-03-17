@@ -11,10 +11,15 @@ The point system is:
 if you solve the puzzle on the
 
 First guess: 1000pts
+
 Second guess: 200pts
+
 Third guess: 100pts
+
 Fourth guess: 60pts
+
 Fifth guess: 45 points
+
 Sixth guess: 15points
 
 Talk about incentive!
