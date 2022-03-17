@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+#Wordler#
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The news keeps going on and on about this game called "Wordle"....so I built it myself for fun. It's less than 200 lines of code and it's basically just the algorithm from the old "Mastermind" game, but using words instead of numbers. I call it Wordler, and you can play it if you want at https://wordlr.herokuapp.com/ 
 
-## Available Scripts
+You can view the dictionary in /public/5LetterWords.txt (warning: the dictionary has like 5000 5-letter words and I've never heard of half of them)
 
-In the project directory, you can run:
+There's a score counter that tracks games won by percentage and by points.
 
-### `npm start`
+The point system is:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+if you solve the puzzle on the
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+First guess: 1000pts
+Second guess: 200pts
+Third guess: 100pts
+Fourth guess: 60pts
+Fifth guess: 45 points
+Sixth guess: 15points
 
-### `npm test`
+Talk about incentive!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The little "graph" icon with the "x" on it next to the scores is how you reset the scores.  It does NOT ask if you're sure--it's like one of those sliding doors in Star Wars that just slams shut immediately.
 
-### `npm run build`
+Feel free to improve the game.  I think a little CSS animations here and there may tie the whole room together, but I haven't gotten to any of that yet.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Thank you for your interest!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
