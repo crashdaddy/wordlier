@@ -36,7 +36,9 @@ class App extends Component {
       gameOver: false,
       score: 0,
       gamesPlayed: 0,
-      gamesWon: 0
+      gamesWon: 0,
+      currentStreak: 0,
+      longestStreak: 0
     };
   }
 
@@ -70,16 +72,40 @@ class App extends Component {
       } else {
       localStorage.setItem("gamesWon", "0");
       }
+      if (localStorage.getItem("currentStreak")){
+        // setting the current streak from memory
+        let currentStreak = Number(localStorage.getItem("currentStreak"));
+        this.setState({
+        currentStreak: currentStreak
+        })
+        } else {
+        // creating the streak for the first time
+        localStorage.setItem("currentStreak", "0");
+        }
+        if (localStorage.getItem("longestStreak")){
+          // setting the current streak from memory
+          let longestStreak = Number(localStorage.getItem("longestStreak"));
+          this.setState({
+          longestStreak: longestStreak
+          })
+          } else {
+          // creating the streak for the first time
+          localStorage.setItem("longestStreak", "0");
+          }
 }
 
   clearScores = () => {
     localStorage.setItem("score","0");
     localStorage.setItem("gamesPlayed","0");
     localStorage.setItem("gamesWon","0");
+    localStorage.setItem("currentStreak","0");
+    localStorage.setItem("longestStreak","0");
     this.setState({
       gamesPlayed:0,
       gamesWon:0,
-      score:0
+      score:0,
+      currentStreak: 0,
+      longestStreak: 0
     })
   }
  
@@ -136,6 +162,8 @@ class App extends Component {
      let currentScore = this.state.score;
      let gamesWon = this.state.gamesWon;
      let gamesPlayed = this.state.gamesPlayed;
+     let currentStreak = this.state.currentStreak;
+     let longestStreak = this.state.longestStreak; 
      let newRow = [];
      for(let i =0; i<wordSubmitted.length;i++){
        usedList.push(wordSubmitted[i]);
@@ -163,6 +191,7 @@ class App extends Component {
        if(wordSubmitted!==currentWord){
        gamesPlayed++;
        }
+       currentStreak=0;
      }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
@@ -189,12 +218,18 @@ class App extends Component {
         default:
           break;
       }
+      currentStreak++;
+      if(currentStreak>longestStreak) {
+        longestStreak= currentStreak;
+      }
       gamesWon++;
       gamesPlayed++;
      }
       localStorage.setItem("gamesPlayed",gamesPlayed.toString());      
       localStorage.setItem("score",currentScore.toString());
       localStorage.setItem("gamesWon",gamesWon.toString());
+      localStorage.setItem("currentStreak",currentStreak.toString());
+      localStorage.setItem("longestStreak",longestStreak.toString());
      this.setState({
        board:currentBoard,
        currentRow:boardRow,
@@ -205,7 +240,9 @@ class App extends Component {
        correctList:correctList,
        score: currentScore,
        gamesWon: gamesWon,
-       gamesPlayed:gamesPlayed
+       gamesPlayed:gamesPlayed,
+       currentStreak: currentStreak,
+       longestStreak:longestStreak
      })} 
     }
   }
@@ -271,7 +308,7 @@ class App extends Component {
           
           <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
           <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
-          <Score score={this.state.score} gamesWon={this.state.gamesWon} gamesPlayed={this.state.gamesPlayed} clearScores={this.clearScores}/>
+          <Score score={this.state.score} gamesWon={this.state.gamesWon} gamesPlayed={this.state.gamesPlayed} clearScores={this.clearScores} currentStreak={this.state.currentStreak} longestStreak={this.state.longestStreak} />
       </header>
     </div>
   );
