@@ -190,8 +190,8 @@ class App extends Component {
        errorMessage="Bad Luck. The word was "+ currentWord + ". Play again!";
        if(wordSubmitted!==currentWord){
        gamesPlayed++;
-       }
        currentStreak=0;
+       }
      }
      if(wordSubmitted===currentWord){
        errorMessage="You WIN!"
