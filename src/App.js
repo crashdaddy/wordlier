@@ -249,10 +249,9 @@ class App extends Component {
     }
   }
 
-  handleChange = (event) => {
+  handleInputBoxChange = (event) => {
     event.target.value=event.target.value.toUpperCase();
     if(event.key==="Enter"){
-      console.log("himom")
       this.keyboardType("Enter");
     }
   }
@@ -319,7 +318,7 @@ class App extends Component {
               })}
         </div>
           
-          <input style={{textTransform:'uppercase'}} type="text" id="guessWordBox" defaultValue={this.state.currentGuess} maxlength="5" className='inputBox' onKeyDown={this.handleChange} />
+          <input autoFocus style={{textTransform:'uppercase'}} type="text" id="guessWordBox" defaultValue={this.state.currentGuess} maxlength="5" className='inputBox' onKeyDown={this.handleInputBoxChange} />
           
           <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
           <Score score={this.state.score} gamesWon={this.state.gamesWon} gamesPlayed={this.state.gamesPlayed} clearScores={this.clearScores} currentStreak={this.state.currentStreak} longestStreak={this.state.longestStreak} />
