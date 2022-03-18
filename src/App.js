@@ -149,6 +149,7 @@ class App extends Component {
   }
 
   submitWord = (wordSubmitted) => {
+    let guessBox = document.getElementById("guessWordBox");
     if(!this.state.gameOver){
      if (this.checkword(wordSubmitted)){
      let currentBoard = [...this.state.board];
@@ -244,8 +245,18 @@ class App extends Component {
        currentStreak: currentStreak,
        longestStreak:longestStreak
      })} 
+     guessBox.value='';
     }
   }
+
+  handleChange = (event) => {
+    event.target.value=event.target.value.toUpperCase();
+    if(event.key==="Enter"){
+      console.log("himom")
+      this.keyboardType("Enter");
+    }
+  }
+
 
   keyboardType = (keyClicked) => {
    this.setState({
@@ -265,12 +276,14 @@ class App extends Component {
       guessBox.value = guessBox.value.substring(0, guessBox.value.length - 1);
       currentGuess=guessBox.value; 
      }else 
-     guessBox.value+=keyClicked;
+     if(keyClicked!=="Enter"){guessBox.value+=keyClicked.toUpperCase();}
+
      currentGuess=guessBox.value;
     }
      else {
      errorMessage="We're only looking for 5-digit words";
-     currentGuess=''
+     currentGuess='';
+     guessBox.value='';
      this.setState({
       errorMessage:errorMessage
     })
@@ -306,7 +319,8 @@ class App extends Component {
               })}
         </div>
           
-          <input type="text" id="guessWordBox" value={this.state.currentGuess} maxlength="5" className='inputBox' />
+          <input style={{textTransform:'uppercase'}} type="text" id="guessWordBox" defaultValue={this.state.currentGuess} maxlength="5" className='inputBox' onKeyDown={this.handleChange} />
+          
           <Keyboard keyboardType={this.keyboardType} usedList={this.state.usedList} foundList={this.state.foundList} correctList={this.state.correctList} />
           <Score score={this.state.score} gamesWon={this.state.gamesWon} gamesPlayed={this.state.gamesPlayed} clearScores={this.clearScores} currentStreak={this.state.currentStreak} longestStreak={this.state.longestStreak} />
       </header>
