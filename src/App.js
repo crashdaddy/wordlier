@@ -130,7 +130,7 @@ class App extends Component {
     let wordNumber = getRandomInt(0,maxWords);
     this.setState({
       words: wordList,
-      currentWord:wordList[wordNumber].toUpperCase()
+      currentWord: wordList[wordNumber].toUpperCase()
     });
   }
 
@@ -149,6 +149,8 @@ class App extends Component {
   }
 
   foundEmAll = (wordSubmitted,letterToCheck,letterIndex) => {
+
+    // count the occurences of each letter in the word submitted
     let wordArray = wordSubmitted.split('');
     const counts = {};
 
@@ -156,16 +158,33 @@ class App extends Component {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
 
+    // count the occurences of each letter in the target word
     let actualWordArray = this.state.currentWord.split('');
     let countsActual = {};
     for (const num of actualWordArray) {
       countsActual[num] = countsActual[num] ? countsActual[num] + 1 : 1;
     }
-
-    if((wordSubmitted[letterIndex]===letterToCheck && counts[letterToCheck]<=countsActual[letterToCheck]) || (wordSubmitted[letterIndex]!==letterToCheck && (counts[letterToCheck]>countsActual[letterToCheck]))){
-      return false
-    } else return true;
-
+   
+    // check if the currentLetter is in the right spot, and if there are still more to find
+    let foundCounter = 0;
+    let foundIt = false;
+    let foundAll = false;
+    for(let i =0;i<5;i++){
+      if(wordSubmitted[i]===this.state.currentWord[i] && wordSubmitted[i]===letterToCheck){
+        foundIt=true;
+        foundCounter++;
+      }
+      if(foundIt){
+        if(countsActual[letterToCheck]>foundCounter){
+          foundAll=false;
+        } else {
+          foundAll=true;
+          return true
+        }
+      }
+      foundIt=false;
+    }
+    return false;
   }
 
   submitWord = (wordSubmitted) => {
