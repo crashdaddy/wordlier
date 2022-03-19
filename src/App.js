@@ -290,7 +290,7 @@ class App extends Component {
 
   handleInputBoxChange = (event) => {
     this.setState({
-      errorMessage:''
+      errorMessage:String.fromCharCode(160)
     })
     event.target.value=event.target.value.toUpperCase();
     if(event.key==="Enter"){
