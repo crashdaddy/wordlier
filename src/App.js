@@ -162,7 +162,7 @@ class App extends Component {
       countsActual[num] = countsActual[num] ? countsActual[num] + 1 : 1;
     }
 
-    if(wordSubmitted[letterIndex]===letterToCheck && counts[letterToCheck]<=countsActual[letterToCheck]){
+    if((wordSubmitted[letterIndex]===letterToCheck && counts[letterToCheck]<=countsActual[letterToCheck]) || wordSubmitted[letterIndex]!==letterToCheck){
       return false
     } else return true;
 
