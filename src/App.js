@@ -32,7 +32,7 @@ class App extends Component {
       currentRow:0,
       currentWord: '',
       currentGuess: '',
-      errorMessage: String.fromCharCode(160), // regular empty space would be ignored--this is &nbsp
+      errorMessage: "Can you guess what I'm thinking?", // regular empty space would be ignored--this is &nbsp
       gameOver: false,
       score: 0,
       gamesPlayed: 0,
