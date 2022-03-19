@@ -7,7 +7,7 @@ class Header extends Component {
        return (
         <div>
         <div style={{fontSize:'2.5em'}}> 🆆 🅾 🆁 🅳 🅻 🅴 🆁 <br/></div>
-        <div style={{color:'red'}}>{this.props.errorMessage}</div>
+        <div style={{color:'yellow'}}>{this.props.errorMessage}</div>
         </div>
        )
 

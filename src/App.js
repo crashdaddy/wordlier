@@ -168,17 +168,14 @@ class App extends Component {
     // check if the currentLetter is in the right spot, and if there are still more to find
     let foundCounter = 0;
     let foundIt = false;
-    let foundAll = false;
+    
     for(let i =0;i<5;i++){
       if(wordSubmitted[i]===this.state.currentWord[i] && wordSubmitted[i]===letterToCheck){
         foundIt=true;
         foundCounter++;
       }
       if(foundIt){
-        if(countsActual[letterToCheck]>foundCounter){
-          foundAll=false;
-        } else {
-          foundAll=true;
+        if(countsActual[letterToCheck]<=foundCounter){
           return true
         }
       }
@@ -292,6 +289,9 @@ class App extends Component {
   }
 
   handleInputBoxChange = (event) => {
+    this.setState({
+      errorMessage:''
+    })
     event.target.value=event.target.value.toUpperCase();
     if(event.key==="Enter"){
       this.keyboardType("Enter");
