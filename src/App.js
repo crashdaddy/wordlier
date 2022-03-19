@@ -32,7 +32,7 @@ class App extends Component {
       currentRow:0,
       currentWord: '',
       currentGuess: '',
-      errorMessage: String.fromCharCode(160),
+      errorMessage: String.fromCharCode(160), // regular empty space would be ignored--this is &nbsp
       gameOver: false,
       score: 0,
       gamesPlayed: 0,
@@ -148,6 +148,26 @@ class App extends Component {
     }
   }
 
+  foundEmAll = (wordSubmitted,letterToCheck,letterIndex) => {
+    let wordArray = wordSubmitted.split('');
+    const counts = {};
+
+    for (const num of wordArray) {
+      counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }
+
+    let actualWordArray = this.state.currentWord.split('');
+    let countsActual = {};
+    for (const num of actualWordArray) {
+      countsActual[num] = countsActual[num] ? countsActual[num] + 1 : 1;
+    }
+
+    if(wordSubmitted[letterIndex]===letterToCheck && counts[letterToCheck]<=countsActual[letterToCheck]){
+      return false
+    } else return true;
+
+  }
+
   submitWord = (wordSubmitted) => {
     let guessBox = document.getElementById("guessWordBox");
     if(!this.state.gameOver){
@@ -169,11 +189,14 @@ class App extends Component {
      for(let i =0; i<wordSubmitted.length;i++){
        usedList.push(wordSubmitted[i]);
         if(currentWord.includes(wordSubmitted[i])){
-        tileColor="blue";
         foundList.push(wordSubmitted[i])
         if(currentWord[i]===wordSubmitted[i]){
           tileColor="lightgreen";
           correctList.push(wordSubmitted[i]);
+        }else{
+          if(this.foundEmAll(wordSubmitted,wordSubmitted[i],i)){
+            tileColor="white"
+          }else tileColor="blue";
         }
       }
       newRow[i]={
