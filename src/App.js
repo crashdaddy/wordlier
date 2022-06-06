@@ -136,7 +136,7 @@ class App extends Component {
 
   checkword = (wordToCheck) => {
     let wordList = this.state.words;
-    let word = wordToCheck.toLowerCase();
+    let word = wordToCheck.toString().toLowerCase();
     if (wordList.includes(word)){
       return(true);
     }
@@ -185,6 +185,7 @@ class App extends Component {
   }
 
   submitWord = (wordSubmitted) => {
+    wordSubmitted=wordSubmitted.toUpperCase();
     let guessBox = document.getElementById("guessWordBox");
     if(!this.state.gameOver){
      if (this.checkword(wordSubmitted)){
